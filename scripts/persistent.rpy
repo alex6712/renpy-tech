@@ -1,0 +1,26 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
+"""Настройки мода.
+
+В данном файле в устанавливаются ``default`` значения атрибутов
+:ref:`persistent`:
+* :attr:`rt_compile` -- список путей для компиляции ``.py`` файлов;
+* :attr:`rt_override_config` -- флаг перезаписи установленных ``config``.
+
+Если флаг :ref:`persistent.rt_override_config` верен, то атрибуты
+:ref:`config` будут перезаписаны на установленные в этом файле.
+"""
+
+default persistent.rt_compile = []  # type: list[str]
+default persistent.rt_override_config = False  # type: bool
+
+init -1 python:
+
+    if persistent.rt_override_config:
+        config.screen_width = 1920
+        config.screen_height = 1080
+        """Размеры экрана"""
+    
+        config.say_attribute_transition = Dissolve(0.2)  # dspr
+        """Переход, использующийся в операторе ``@``"""

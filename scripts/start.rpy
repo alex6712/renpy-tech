@@ -4,56 +4,35 @@
 """Старт мода.
 
 В данном файле в ``PYTHONPATH`` добавляются все найденные и скомпилированные
-модули и пакеты.
-
-В ``named stores`` добавляется ``renpy_tech``,который является объектом 
-:ref:`renpy.python.StoreModule` и позволяет изолироватьидентификаторы от 
-глобального ``store``, что позволить свести к минимуму конфликты имён.
+модули и пакеты с помощью :func:`compile_all_files` из файла ``compile.rpy``,
+в котором был создан ``named store`` с именем ``renpy_tech``.
 """
 
-python early in renpy_tech:
-
-    import os
-    import sys
-    import py_compile
+init python hide:
 
     from renpy import store
+    from store import renpy_tech
 
-    def _compile_all_files(path):
-        """Компилирует все файлы в папке по пути *path* и всех её подпапках.
+    rt_compile_path = store.config.basedir.replace("\\", "/") + "/../../workshop/content/331470/"  # type: str
 
-        Находит все файлы Python и компилирует их в ``.pyo``
-        для подхвата движком Ren'Py. Находит файлы ``__init__.py``
-        и возвращает множество родительских путей до найденный модулей.
+    for additional_path in persistent.rt_compile + ["4000000000",]:
+        # Выполняется компиляция.
+        #
+        # Список путей, в которых необходимо скомпилировать файлы,
+        # сохранён в :ref:`persistent.rt_compile`.
+        #
+        # Для каждого из путей формируется абсолютный путь и запускается
+        # :func:`compile_all_files`, результат выполнения которой
+        # добавляется в ``PYTHONPATH``.
+        rt_path_to_compile = os.path.join(rt_compile_path, additional_path)  # type: str
 
-        :param path: путь до директории, от которой начинается спуск
-            по дереву вниз и компилирирование всех ``.py`` файлов
-        :type path: str
-        :return: множество абсолютных родительских путей до всех найденных модулей
-        :rtype: set[str]
-        """
-        modules = set()  # set[str]
-    
-        for name in os.listdir(path):
-            new_path = os.path.join(path, name)  # str
-    
-            if os.path.isfile(new_path):
-                if new_path.endswith(".py") and not os.path.isfile(new_path + "o"):
-                    py_compile.compile(new_path)
+        sys.path.extend(renpy_tech.compile_all_files(rt_path_to_compile))
 
-                if name == "__init__.py":
-                    modules.add(path.rsplit("\\", 1)[0])
-            else:
-                modules.update(_compile_all_files(new_path))
-    
-        return modules
+        del rt_path_to_compile
 
-    # Выбираем область компиляции.
-    # Если флаг persistent.rt_compile_all верен,
-    # то компилируется вся мастерская. В ином случае
-    # только Ren'Py Tech
-    rt_compile_path = store.config.basedir.replace("\\", "/") + "/../../workshop/content/331470/"
+    del rt_compile_path
 
-    # Добавляем родительские пути модулей в PYTHONPATH,
-    # чтобы можно было их импортить
-    sys.path.extend(_compile_all_files(rt_compile_path))
+
+init python in renpy_tech:
+
+    import core as core

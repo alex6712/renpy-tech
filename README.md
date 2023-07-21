@@ -47,6 +47,6 @@ _**alex6712**_ - _Ванюков Алексей Игоревич_, группа 
 
 ### Контакты
 
-* [Адрес электронной почты](vanyukov.alex@gmail.com)
+* Адрес электронной почты: vanyukov.alex@gmail.com
 * [Telegram](https://t.me/Eclipse6712)
 * [VKontakte](https://vk.com/zerolevelmath)
