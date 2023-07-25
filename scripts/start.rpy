@@ -4,7 +4,7 @@
 """Старт мода.
 
 В данном файле в ``PYTHONPATH`` добавляются все найденные и скомпилированные
-модули и пакеты с помощью :func:`compile_all_files` из файла ``compile.rpy``,
+модули и пакеты с помощью ``compile_all_files`` из файла ``compile.rpy``,
 в котором был создан ``named store`` с именем ``renpy_tech``.
 """
 
@@ -19,18 +19,16 @@ init python hide:
         # Выполняется компиляция.
         #
         # Список путей, в которых необходимо скомпилировать файлы,
-        # сохранён в :ref:`persistent.rt_compile`.
+        # сохранён в ``persistent.rt_compile``.
         #
         # Для каждого из путей формируется абсолютный путь и запускается
-        # :func:`compile_all_files`, результат выполнения которой
+        # ``compile_all_files``, результат выполнения которой
         # добавляется в ``PYTHONPATH``.
         rt_path_to_compile = os.path.join(rt_compile_path, additional_path)  # type: str
 
         sys.path.extend(renpy_tech.compile_all_files(rt_path_to_compile))
 
-        del rt_path_to_compile
-
-    del rt_compile_path
+    del rt_compile_path, rt_path_to_compile
 
 
 init python in renpy_tech:
