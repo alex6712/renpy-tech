@@ -1,15 +1,12 @@
-#!/usr/bin/python
-# -*- coding: utf-8 -*-
-
 """Настройки мода.
 
 В данном файле в устанавливаются ``default`` значения атрибутов
-:ref:`persistent`:
-* :attr:`rt_compile` -- список путей для компиляции ``.py`` файлов;
-* :attr:`rt_override_config` -- флаг перезаписи установленных ``config``.
+``persistent``:
+* ``rt_compile`` -- список путей для компиляции ``.py`` файлов;
+* ``rt_override_config`` -- флаг перезаписи установленных ``config``.
 
-Если флаг :ref:`persistent.rt_override_config` верен, то атрибуты
-:ref:`config` будут перезаписаны на установленные в этом файле.
+Если флаг ``persistent.rt_override_config`` верен, то атрибуты
+``config`` будут перезаписаны на установленные в этом файле.
 """
 
 default persistent.rt_compile = []  # type: list[str]
