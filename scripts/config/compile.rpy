@@ -1,6 +1,3 @@
-#!/usr/bin/python
-# -*- coding: utf-8 -*-
-
 """Файл с объявлением функции компиляции и ``named store``.
 
 Создаётся функция ``compile_all_files`` для компиляции ``.py`` файлов
@@ -14,12 +11,11 @@
 python early in renpy_tech:
 
     import os
-    import sys
     import py_compile
 
-    from renpy import store
 
     def compile_all_files(path):
+        # type: (str) -> set[str]
         """Компилирует все файлы в папке по пути *path* и всех её подпапках.
 
         Находит все файлы Python и компилирует их в ``.pyo``

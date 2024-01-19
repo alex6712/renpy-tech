@@ -9,4 +9,4 @@
 __author__ = "alex6712"
 
 __version__ = "1.0.1"
-__email__ = "vanyukov.alex@gmail.com"
+__email__ = "alexeivanyukov@yandex.ru"
