@@ -9,8 +9,7 @@
 
 init 3 python hide:
 
-    from store import mods
-    from store import modsImages as mods_images
+    from store import mods    
     from store.renpy_tech.config import Config
 
     _config = Config()  # type: Config
@@ -18,9 +17,11 @@ init 3 python hide:
     mods["renpy_tech_start"] = "%s" % _config.MODIFICATION_NAME  # Добаление мода в список модов
 
     try:
-        mods_images["renpy_tech_start"] = (None, False, _config.MODIFICATION_NAME)  # Добаление мода в список модов
-    except NameError as _:
+        from store import modsImages as mods_images
+    except ModuleNotFoundError as _:
         pass
+    else:
+        mods_images["renpy_tech_start"] = (None, False, _config.MODIFICATION_NAME)  # Добаление мода в список модов
 
 label renpy_tech_start:
 

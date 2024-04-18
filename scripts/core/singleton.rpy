@@ -30,7 +30,7 @@ init 1 python in renpy_tech.core:
         >>> from store.renpy_tech.core import Singleton
         >>> class SingletonClass(Singleton):
         ...     pass
-        ...     
+        ...
         >>> singleton_one = SingletonClass()
         >>> singleton_two = SingletonClass()
         >>> singleton_one is singleton_two

@@ -2,13 +2,13 @@
 
 В данном файле реализованы многие базовые функции, которые
 используются в разных участках модификации.
-Субмодуль ``functools`` модуля ``renpy_tech``.
+Субмодуль ``functools`` модуля ``renpy_tech.core``.
 
 Список функций и их саммари:
 * ``get_salt`` -- функция генерации криптографической соли.
 """
 
-init 2 python in renpy_tech.functools:
+init 2 python in renpy_tech.core.functools:
 
     from random import choice as random_choice
     from string import ascii_letters, digits
@@ -39,7 +39,7 @@ init 2 python in renpy_tech.functools:
 
         Examples
         --------
-        >>> from store.renpy_tech.functools import get_salt
+        >>> from store.renpy_tech.core.functools import get_salt
         >>> get_salt()
         '3sKBzm8Hqlp12uoL'
 

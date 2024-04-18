@@ -3,10 +3,11 @@
 В данном файле описаны классы для работы с хранилищами:
 * ``Storage`` -- для создания именованных хранилищ;
 * ``StorageManager`` -- для менеджмента хранилищ.
-Также создан субмодуль ``storage`` модуля ``renpy_tech``.
+
+Также создан субмодуль ``storage`` модуля ``renpy_tech.core``.
 """
 
-init 2 python in renpy_tech.storage:
+init 2 python in renpy_tech.core.storage:
 
     class Storage:
         """Хранилище.
@@ -25,7 +26,7 @@ init 2 python in renpy_tech.storage:
             хранилища.
         name : str
             Наименование хранилища.
-        _limit : int
+        _limit : Optional[int]
             Предел количества хранимых элементов.
         _frozen : bool
             Флаг невозможности модификации. Если установлен на True,
@@ -61,7 +62,7 @@ init 2 python in renpy_tech.storage:
                 Наименование хранилища. Если не указано, генерируется
                 автоматически по шаблону:
                     storage_<порядковый номер>
-            limit : int
+            limit : Optional[int]
                 Предел количества хранимых элементов. Если не указан,
                 предел не установлен.
             frozen : bool
@@ -125,7 +126,7 @@ init 2 python in renpy_tech.storage:
 
             See Also
             --------
-            store.renpy_tech.storage.Storage._set_frozen :
+            store.renpy_tech.core.storage.Storage._set_frozen :
                 Сеттер атрибута ``_frozen``.
             """
             self._set_frozen(True)
@@ -140,7 +141,7 @@ init 2 python in renpy_tech.storage:
 
             See Also
             --------
-            store.renpy_tech.storage.Storage._set_frozen :
+            store.renpy_tech.core.storage.Storage._set_frozen :
                 Сеттер атрибута ``_frozen``.
             """
             self._set_frozen(False)
