@@ -1,44 +1,26 @@
 """Старт мода.
 
-В данном файле в ``PYTHONPATH`` добавляются все найденные и скомпилированные
-модули и пакеты с помощью ``compile_all_files`` из файла ``compile.rpy``,
-в котором был создан ``named store`` с именем ``renpy_tech``.
+В данном файле мод добавляется в оригинальный список всех
+модификаций ``mods`` и в его модифицированную табличную
+версию ``modsImages``.
+
+Также здесь описана метка старта модификации ``renpy_tech_start``.
 """
 
-init python hide:
+init 3 python hide:
 
-    from store import (
-        mods,
-        os,
-        renpy_tech,
-        sys,
-    )
+    from store import mods
     from store import modsImages as mods_images
-    from store.renpy_tech import constants
+    from store.renpy_tech.config import Config
 
-    rt_compile_path = store.config.basedir.replace("\\", "/") + "/../../workshop/content/331470/"  # type: str
+    _config = Config()  # type: Config
 
-    for additional_path in persistent.rt_compile + [constants.STEAM_ID,]:
-        # Выполняется компиляция.
-        #
-        # Список путей, в которых необходимо скомпилировать файлы,
-        # сохранён в ``persistent.rt_compile``.
-        #
-        # Для каждого из путей формируется абсолютный путь и запускается
-        # функция ``compile_all_files``, результат выполнения которой
-        # добавляется в ``PYTHONPATH``.
-        rt_path_to_compile = os.path.join(rt_compile_path, additional_path)  # type: str
-
-        sys.path.extend(renpy_tech.compile_all_files(rt_path_to_compile))
-
-    mods["renpy_tech_start"] = "%s" % constants.MODIFICATION_NAME
-    """Добаление мода в список модов"""
+    mods["renpy_tech_start"] = "%s" % _config.MODIFICATION_NAME  # Добаление мода в список модов
 
     try:
-        mods_images["renpy_tech_start"] = (None, False, constants.MODIFICATION_NAME)
+        mods_images["renpy_tech_start"] = (None, False, _config.MODIFICATION_NAME)  # Добаление мода в список модов
     except NameError as _:
         pass
-    """Добавляем мод в табличное меню модов"""
 
 label renpy_tech_start:
 

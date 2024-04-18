@@ -2,17 +2,15 @@
 
 В данном файле в устанавливаются ``default`` значения атрибутов
 ``persistent``:
-* ``rt_compile`` -- список путей для компиляции ``.py`` файлов;
 * ``rt_override_config`` -- флаг перезаписи установленных ``config``.
 
 Если флаг ``persistent.rt_override_config`` верен, то атрибуты
 ``config`` будут перезаписаны на установленные в этом файле.
 """
 
-default persistent.rt_compile = []  # type: list[str]
 default persistent.rt_override_config = False  # type: bool
 
-init -1 python:
+init 1 python:
 
     if persistent.rt_override_config:
         config.screen_width = 1920
