@@ -7,7 +7,7 @@
 Также здесь описана метка старта модификации ``renpy_tech_start``.
 """
 
-init 3 python hide:
+init 999 python hide:
 
     from store import mods    
     from store.renpy_tech.config import Config

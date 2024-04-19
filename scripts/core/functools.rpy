@@ -8,7 +8,7 @@
 * ``get_salt`` -- функция генерации криптографической соли.
 """
 
-init 2 python in renpy_tech.core.functools:
+init -1 python in renpy_tech.core.functools:
 
     from random import choice as random_choice
     from string import ascii_letters, digits

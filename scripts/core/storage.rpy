@@ -7,7 +7,7 @@
 Также создан субмодуль ``storage`` модуля ``renpy_tech.core``.
 """
 
-init 2 python in renpy_tech.core.storage:
+init -1 python in renpy_tech.core.storage:
 
     class Storage:
         """Хранилище.
@@ -74,7 +74,7 @@ init 2 python in renpy_tech.core.storage:
             """
             Storage._counter += 1
 
-            self._storage = list()  # type: list[Any]
+            self._storage = list()  # type: List[Any]
 
             if _iterable is not None:
                 self._storage.extend(_iterable)
