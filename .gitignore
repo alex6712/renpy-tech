@@ -13,5 +13,8 @@ venv/
 env.bak/
 venv.bak/
 
-#  Ren'Py Compiled Files
+# Ren'Py Compiled Files
 *.rpyc
+
+# VSCode settings
+.vscode/
