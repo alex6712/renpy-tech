@@ -112,7 +112,33 @@ init 1 python in renpy_tech.cdd.flashlight:
 
         def render(self, width, height, st, at):
             # type: (int, int, float, float) -> Render
-            """TODO: docstring
+            """Возвращает объект Render сцены.
+
+            Получает на вход ширину и высоту области, в которой находится
+            сцена, а также ``shown_timebase`` и ``animation_timebase``.
+
+            Аргументы ``st`` и ``at`` игнорируются.
+
+            Создаёт общий объект рендера сцены ``rv`` типа ``Render``. Устанавливает
+            операцию рендера ``IMAGEDISSOLVE``, реализующую маскирование. На общий
+            объект рендера наносятся три объекта рендера используемых отображаемых
+            элементов: маски, занавеса и подложки.
+
+            Parameters
+            ----------
+            width : int
+                Ширина области сцены.
+            height : int
+                Высота области сцены.
+            st : float
+                Время, прошедшее с момента вывода сцены на экран.
+            at : float
+                Время, прошедшее с момента вывода тега сцены на экран.
+
+            Returns
+            -------
+            rv : Render
+                Объект рендера сцены.
             """
             scene = renpy.render(self._child, width, height, st, at)  # type: Render
             curtain = renpy.render(self._curtain, width, height, st, at)  # type: Render
@@ -146,6 +172,32 @@ init 1 python in renpy_tech.cdd.flashlight:
 
         def event(self, ev, x, y, st):
             # type: (pygame.Event, int, int, float) -> Union[None, Any]
+            """Метод обработки событий.
+
+            Принимает события типа ``pygame.Event``.
+
+            Т.к. маска фонарика следует за мышкой игрока, объект
+            сцены реагирует только на события перемещения мыши.
+
+            Вне зависимости от события передаём его подложке, чтобы
+            реализовать возможность испольхования интекративных фонов
+            вместе с CDD фонарика.
+
+            Parameters
+            ----------
+            ev : pygame.Event
+                Событие, которое было прислано на объект сцены.
+            x : int
+                Координата события по оси OX.
+            y : int
+                Координата события по оси OY.
+            st : float
+                Время, прошедшее с момента вывода сцены на экран.
+
+            Returns
+            -------
+            Результат вызова метода ``event`` подложки.
+            """
             if self.events and ev.type == pygame.MOUSEMOTION:
                 self._xpos, self._ypos = renpy.get_mouse_pos()
                 renpy.redraw(self, 0)
@@ -154,4 +206,14 @@ init 1 python in renpy_tech.cdd.flashlight:
 
         def visit(self):
             # type: () -> List[Displayable]
+            """Возвращает список всех использованных Displayables.
+
+            Необходимо для ``predict`` и некоторых других встроенных
+            функций Ren'Py, увеличивающих быстродействие.
+
+            Returns
+            -------
+            List[Displayable]
+                Список всех использованных Displayables.
+            """
             return [self._child, self._mask, self._curtain]
