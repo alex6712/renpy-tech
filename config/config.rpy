@@ -9,7 +9,7 @@
 
 init 2 python in renpy_tech.config:
 
-    from store.renpy_tech.core import Singleton
+    from store.renpy_tech.core.singleton import Singleton
 
 
     class Config(Singleton):

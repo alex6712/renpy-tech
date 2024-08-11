@@ -14,14 +14,14 @@ init 999 python hide:
 
     _config = Config()  # type: Config
 
-    mods["renpy_tech_start"] = "%s" % _config.MODIFICATION_NAME  # Добаление мода в список модов
+    mods["renpy_tech_start"] = "{}".format(_config.MODIFICATION_NAME)  # добаление мода в список модов
 
     try:
         from store import modsImages as mods_images
-    except ModuleNotFoundError as _:
+    except ImportError as _:
         pass
     else:
-        mods_images["renpy_tech_start"] = (None, False, _config.MODIFICATION_NAME)  # Добаление мода в список модов
+        mods_images["renpy_tech_start"] = (None, False, _config.MODIFICATION_NAME)  # добаление мода в табличный список модов
 
 label renpy_tech_start:
 

@@ -8,7 +8,7 @@
 урезающими функционал (как в случае с декоратором).
 """
 
-init -1 python in renpy_tech.core:
+init -1 python in renpy_tech.core.singleton:
 
     class Singleton:
         """Родительский класс для реализации паттерна Singleton.
