@@ -38,7 +38,7 @@ init -1 python in renpy_tech.core.singleton:
         """
 
         _instance = None  # type: Optional[Singleton]
-        """Единственнй экземпляр класса"""
+        """Единственный экземпляр класса"""
 
         def __new__(cls, *args, **kwargs):
             # type: (*Any, **Any) -> Singleton

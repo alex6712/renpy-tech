@@ -116,7 +116,43 @@ init 1 python in renpy_tech.characters:
 
     def define_dynamic_character(character_id, name=None, is_nvl=False, **properties):
         # type: (str, Optional[str], bool, **Any) -> DynamicCharacter
-        """TODO: docstring"""
+        """Создает экземпляр DynamicCharacter на основе данных о персонаже.
+
+        Создает объект персонажа, комбинируя свойства по умолчанию, зарегистрированные данные
+        и параметры вызова функции с соблюдением приоритетов.
+
+        Attributes
+        ----------
+        character_id : str
+            Уникальный идентификатор персонажа (например, "mi"). Должен совпадать с ID,
+            использованным в `register_dynamic_character`. Также становится именем глобальной переменной.
+        name : Optional[str]
+            Отображаемое имя персонажа. Если None (по умолчанию), будет использовано имя,
+            зарегистрированное через `register_dynamic_character`.
+        is_nvl : bool
+            Флаг режима NVL. Если True, применяются специфичные для NVL-режима параметры
+            по умолчанию. По умолчанию False.
+        **properties : Any
+            Дополнительные свойства персонажа, имеющие наивысший приоритет.
+
+        Returns
+        -------
+        character : DynamicCharacter
+            Созданный объект персонажа, который также сохраняется в глобальном пространстве имен
+            под ключом `character_id`.
+
+        Notes
+        -----
+        Приоритеты свойств (от высшего к низшему):
+        1. Параметры, переданные напрямую в функцию (**properties)
+        2. Свойства, зарегистрированные через register_dynamic_character
+        3. Стандартные свойства (разные для ADV и NVL режимов)
+
+        Examples
+        --------
+        >>> register_dynamic_character("mi", "Мику", "#0ff")
+        >>> define_dynamic_character("mi", is_nvl=True, what_style="normal_day")
+        """
         kind, ctc_animation = (nvl, "ctc_animation_nvl") if is_nvl else (adv, "ctc_animation")
 
         default_properties = {
@@ -140,7 +176,7 @@ init 1 python in renpy_tech.characters:
             * характеристики персонажа по умолчанию ``default_properties``.
 
             Для того, чтобы не нарушить иерархию, была создана эта функция. Она позволяет
-            добавлять новые значения при спуске по иерархии, но не обновлять сущестующие.
+            добавлять новые значения при спуске по иерархии, но не обновлять существующие.
             Таким образом то, что было установлено в более верхней по иерархии структуре
             не будет заменено, а то, что не было установлено в ней, будет взято из структуры
             ниже по иерархии.

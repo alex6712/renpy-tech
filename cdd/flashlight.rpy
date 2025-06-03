@@ -63,11 +63,11 @@ init 1 python in renpy_tech.cdd.flashlight:
         >>> show expression Flashlight("bg some_your_bg", "your_flashlight_mask") as bg
         """
         def __init__(
-            self,            # type: Flashlight
-            child,           # type: Union[str, Displayable]
-            mask,            # type: Union[str, Displayable]
+            self,              # type: Flashlight
+            child,             # type: Union[str, Displayable]
+            mask,              # type: Union[str, Displayable]
             curtain="#000",  # type: Union[str, Displayable]
-            **kwargs         # type: **Any
+            **kwargs           # type: **Any
         ):
             # type: (...) -> None
             super(Flashlight, self).__init__(**kwargs)
@@ -180,7 +180,7 @@ init 1 python in renpy_tech.cdd.flashlight:
             сцены реагирует только на события перемещения мыши.
 
             Вне зависимости от события передаём его подложке, чтобы
-            реализовать возможность испольхования интекративных фонов
+            реализовать возможность использования интерактивных фонов
             вместе с CDD фонарика.
 
             Parameters

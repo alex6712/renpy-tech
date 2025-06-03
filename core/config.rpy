@@ -1,13 +1,13 @@
 """Файл конфигурации мода.
 
 В данном файле описан класс ``Config``, содержащий
-главные константы модификации, а также создаётся субмодуль
+главные константы модификации, а также создаётся подмодуль
 ``config`` модуля ``renpy_tech``.
 
 Используется практически во всех других модулях модификации.
 """
 
-init 2 python in renpy_tech.config:
+init 1 python in renpy_tech.core.config:
 
     from store.renpy_tech.core.singleton import Singleton
 
@@ -33,3 +33,20 @@ init 2 python in renpy_tech.config:
 
         MODIFICATION_NAME = "Ren'Py Tech | Техно Ren'Py"  # type: str
         """Наименование мода"""
+
+    
+    def get_config():
+        # type () -> Config
+        """Возвращает объект конфига мода.
+
+        Returns
+        -------
+        config : Config
+            Конфиг модификации.
+
+        Notes
+        -----
+        Предпочтительнее использовать именно эту функцию, а не
+        конструктор.
+        """
+        return Config()
